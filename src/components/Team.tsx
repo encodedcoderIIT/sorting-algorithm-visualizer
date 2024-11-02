@@ -13,7 +13,7 @@ const teamMembers: TeamMember[] = [
   {
     id: 1,
     name: "Suresh",
-    role: "Team Member",
+    role: "Team Lead, web app developement",
     description:
       "Expert in algorithm visualization and frontend development. Contributing to making complex algorithms more understandable.",
     imageUrl: "/images/team/member1.png",
@@ -21,8 +21,8 @@ const teamMembers: TeamMember[] = [
   },
   {
     id: 2,
-    name: "Greeshma PG",
-    role: "Team Member",
+    name: "Greeshma P G",
+    role: "Quadratic sorting algos Vizualization",
     description:
       "Specialized in developing interactive features and ensuring smooth user experience in algorithm visualization.",
     imageUrl: "/images/team/member2.png",
@@ -31,7 +31,7 @@ const teamMembers: TeamMember[] = [
   {
     id: 3,
     name: "Raman Kumar",
-    role: "Team Member",
+    role: "Quasilinear sorting algos visualization",
     description:
       "Focused on implementing sorting algorithms and creating intuitive visual representations for better understanding.",
     imageUrl: "/images/team/member3.png",
@@ -81,7 +81,7 @@ const Team: React.FC = () => {
         </p>
       </div>
 
-      <div className="grid place-items-center gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid place-items-center gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {teamMembers.map((member) => (
           <TeamMemberCard key={member.id} member={member} />
         ))}
