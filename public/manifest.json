@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Sorting Visualizer",
+  "name": "Sorting Algorithm Visualizer - VizSoft",
   "icons": [
     {
       "src": "favicon.ico",
