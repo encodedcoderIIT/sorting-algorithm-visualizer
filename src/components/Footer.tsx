@@ -7,7 +7,7 @@ function Footer() {
       <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-0">
         <div>
           <p className="text-sm sm:text-base text-center sm:text-left">
-            &copy;{new Date().getFullYear()} VizSoft
+            Copyright &copy; {new Date().getFullYear()} VizSoft
           </p>
         </div>
         <nav>
