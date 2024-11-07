@@ -11,13 +11,13 @@ interface TeamMember {
 
 const teamMembers: TeamMember[] = [
   {
-    id: 1,
-    name: "Suresh",
-    role: "Team Lead, web app developement",
+    id: 3,
+    name: "Raman Kumar",
+    role: "Quasilinear sorting algos visualization",
     description:
-      "Expert in algorithm visualization and frontend development. Contributing to making complex algorithms more understandable.",
-    imageUrl: "/images/team/member1.png",
-    bgColor: "bg-gradient-to-r from-blue-200 via-purple-200 to-pink-200",
+      "Focused on implementing sorting algorithms and creating intuitive visual representations for better understanding.",
+    imageUrl: "/images/team/member3.png",
+    bgColor: "bg-gradient-to-r from-green-100 to-green-200",
   },
   {
     id: 2,
@@ -29,13 +29,13 @@ const teamMembers: TeamMember[] = [
     bgColor: "bg-gradient-to-r from-gray-100 to-gray-200",
   },
   {
-    id: 3,
-    name: "Raman Kumar",
-    role: "Quasilinear sorting algos visualization",
+    id: 1,
+    name: "Suresh",
+    role: "Team Lead, web app developement",
     description:
-      "Focused on implementing sorting algorithms and creating intuitive visual representations for better understanding.",
-    imageUrl: "/images/team/member3.png",
-    bgColor: "bg-gradient-to-r from-green-100 to-green-200",
+      "Expert in algorithm visualization and frontend development. Contributing to making complex algorithms more understandable.",
+    imageUrl: "/images/team/member1.png",
+    bgColor: "bg-gradient-to-r from-blue-200 via-purple-200 to-pink-200",
   },
 ];
 
@@ -75,7 +75,9 @@ const Team: React.FC = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="mb-8 text-center">
-        <h2 className="mb-2 text-2xl font-bold text-foreground">Our Team</h2>
+        <h2 className="mb-2 text-2xl font-bold text-foreground">
+          Our Team (RGS)
+        </h2>
         <p className="text-base text-muted-foreground">
           Meet the team behind the Sorting Algorithm Visualizer.
         </p>

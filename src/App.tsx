@@ -25,8 +25,9 @@ function App() {
                 onClick={closeMenu}
               >
                 <h1 className="text-xl sm:text-2xl md:text-3xl font-bold">
-                  Sorting Algorithm Visualizer
+                  VizSoft_RGS-SAV
                 </h1>
+                <p>Sorting Algorithm Visualizer by RGS</p>
               </Link>
 
               {/* Desktop Navigation */}

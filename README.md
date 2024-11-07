@@ -1,8 +1,10 @@
-# Getting Started with Create React App
+# Running the VizSoft_RGS-SAV App
+
+Access the live web-app here: https://vizsoft-sav.vercel.app/
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Run the WebApp
 
 In the project directory, you can run:
 
