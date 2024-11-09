@@ -327,6 +327,7 @@ const SortingVisualizer: React.FC = () => {
     try {
       if (isPlaying) {
         setIsPlaying(false);
+        window.location.reload();
         return;
       }
 
