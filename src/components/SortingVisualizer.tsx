@@ -404,7 +404,7 @@ const SortingVisualizer: React.FC = () => {
             onClick={handleStartSorting}
             variant={isPlaying ? "destructive" : "default"}
           >
-            {isPlaying ? "Stop" : "Start Sorting"}
+            {isPlaying ? "Stop" : "Start"}
           </Button>
 
           <div className="flex items-center gap-2">
