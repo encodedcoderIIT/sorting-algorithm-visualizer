@@ -342,6 +342,81 @@ const SortingVisualizer: React.FC = () => {
     setSorted(Array.from({ length: n }, (_, i) => i));
   }
 
+  // Heap Sort Implementation
+  async function heapSortStart() {
+    const arr = [...array]; // Create a local copy of the array
+    await heapSort(arr);
+
+    async function heapSort(arr: number[]) {
+      const n = arr.length;
+
+      // Build max heap
+      for (let i = Math.floor(n / 2) - 1; i >= 0; i--) {
+        await heapify(arr, n, i);
+      }
+
+      // Extract elements from heap one by one
+      for (let i = n - 1; i > 0; i--) {
+        // Move current root to end
+        setSwapping([0, i]);
+        [arr[0], arr[i]] = [arr[i], arr[0]];
+        setArray([...arr]);
+        setSwaps((prev) => prev + 1);
+        await delay(300);
+        setSwapping([]);
+
+        // Mark the sorted element
+        setSorted((prev) => [...prev, i]);
+
+        // Call max heapify on the reduced heap
+        await heapify(arr, i, 0);
+      }
+
+      // Mark the first element as sorted
+      setSorted((prev) => [...prev, 0]);
+    }
+
+    async function heapify(arr: number[], n: number, i: number) {
+      let largest = i;
+      const left = 2 * i + 1;
+      const right = 2 * i + 2;
+
+      // Compare left child
+      if (left < n) {
+        setComparing([i, left]);
+        setComparisons((prev) => prev + 1);
+        await delay(300);
+        if (arr[left] > arr[largest]) {
+          largest = left;
+        }
+        setComparing([]);
+      }
+
+      // Compare right child
+      if (right < n) {
+        setComparing([i, right]);
+        setComparisons((prev) => prev + 1);
+        await delay(300);
+        if (arr[right] > arr[largest]) {
+          largest = right;
+        }
+        setComparing([]);
+      }
+
+      // Swap and continue heapifying if root is not largest
+      if (largest !== i) {
+        setSwapping([i, largest]);
+        [arr[i], arr[largest]] = [arr[largest], arr[i]];
+        setArray([...arr]);
+        setSwaps((prev) => prev + 1);
+        await delay(300);
+        setSwapping([]);
+
+        await heapify(arr, n, largest);
+      }
+    }
+  }
+
   // Handle Started Sorting
   const handleStartSorting = async () => {
     try {
@@ -369,6 +444,9 @@ const SortingVisualizer: React.FC = () => {
           break;
         case "insertion": // Add this case
           await insertionSort();
+          break;
+        case "heapsort": // Add this case
+          await heapSortStart();
           break;
         default:
           console.log("Algorithm not implemented");
@@ -503,7 +581,6 @@ const SortingVisualizer: React.FC = () => {
             {algorithms[algorithm as keyof typeof algorithms].pseudocode}
           </pre>
         </div>
-        {/* Footer */}
       </div>
     </div>
   );

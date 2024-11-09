@@ -355,6 +355,67 @@ function merge(left, right) {
         ],
       },
     },
+    heap: {
+      title: "Heap Sort",
+      complexity: {
+        "Time (Best)": "O(n log n)",
+        "Time (Average)": "O(n log n)",
+        "Time (Worst)": "O(n log n)",
+        Space: "O(1)",
+      },
+      description:
+        "Heap Sort builds a heap from the input data and then repeatedly extracts the maximum element from the heap and rebuilds the heap.",
+      code: `function heapSort(arr) {
+      function heapify(arr, n, i) {
+        let largest = i;
+        const left = 2 * i + 1;
+        const right = 2 * i + 2;
+    
+        if (left < n && arr[left] > arr[largest]) {
+          largest = left;
+        }
+    
+        if (right < n && arr[right] > arr[largest]) {
+          largest = right;
+        }
+    
+        if (largest !== i) {
+          [arr[i], arr[largest]] = [arr[largest], arr[i]];
+          heapify(arr, n, largest);
+        }
+      }
+    
+      const n = arr.length;
+    
+      for (let i = Math.floor(n / 2) - 1; i >= 0; i--) {
+        heapify(arr, n, i);
+      }
+    
+      for (let i = n - 1; i > 0; i--) {
+        [arr[0], arr[i]] = [arr[i], arr[0]];
+        heapify(arr, i, 0);
+      }
+    
+      return arr;
+    }`,
+      useCases: [
+        "Large datasets",
+        "When constant space complexity is required",
+        "When a stable sort is not necessary",
+      ],
+      prosAndCons: {
+        pros: [
+          "Good time complexity of O(n log n)",
+          "In-place sorting algorithm",
+          "Not sensitive to the initial order of elements",
+        ],
+        cons: [
+          "Not a stable sort",
+          "More complex to implement compared to simpler algorithms like Bubble Sort",
+          "Requires random access to the data",
+        ],
+      },
+    },
   };
 
   return (

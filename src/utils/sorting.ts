@@ -111,6 +111,34 @@ export const algorithms: Record<string, Algorithm> = {
   right = mergeSort(arr[mid+1...n])
   return merge(left, right)`,
   },
+  heapsort: {
+    name: "Heap Sort",
+    timeComplexity: "O(n log n)",
+    spaceComplexity: "O(1)",
+    description:
+      "Builds a heap from the input data and then repeatedly extracts the maximum element from the heap and rebuilds the heap.",
+    pseudocode: `heapSort(arr)
+    buildMaxHeap(arr)
+    for i = length of arr - 1 to 1
+      swap(arr[0], arr[i])
+      heapify(arr, 0, i)
+  
+    function buildMaxHeap(arr)
+      for i = length of arr / 2 - 1 to 0
+        heapify(arr, i, length of arr)
+    
+    function heapify(arr, i, n)
+      largest = i
+      left = 2 * i + 1
+      right = 2 * i + 2
+      if left < n and arr[left] > arr[largest]
+        largest = left
+      if right < n and arr[right] > arr[largest]
+        largest = right
+      if largest != i
+        swap(arr[i], arr[largest])
+        heapify(arr, largest, n)`,
+  },
 };
 
 // Helper function to calculate delay based on array size and speed setting
