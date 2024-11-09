@@ -119,121 +119,141 @@ const SortingVisualizer: React.FC = () => {
   }
 
   // Quick Sort Implementation
-  async function quickSort(start = 0, end = array.length - 1) {
-    let arr = [...array]; // Create a local copy of the array
+  async function quickSortStart() {
+    const arr = [...array]; // Create a local copy of the array
+    await quickSort(arr, 0, arr.length - 1);
 
-    if (start >= end) return;
+    async function quickSort(arr: number[], start: number, end: number) {
+      if (start >= end) return;
 
-    async function partition(low: number, high: number): Promise<number> {
-      const pivot = arr[high];
-      let i = low - 1;
+      async function partition(low: number, high: number): Promise<number> {
+        const pivot = arr[high];
+        let i = low - 1;
 
-      for (let j = low; j < high; j++) {
-        setComparing([j, high]);
-        setComparisons((prev) => prev + 1);
-        await delay(300);
+        for (let j = low; j < high; j++) {
+          // Visualize comparison
+          setComparing([j, high]);
+          setComparisons((prev) => prev + 1);
+          await delay(300);
 
-        if (arr[j] <= pivot) {
-          i++;
-          if (i !== j) {
+          if (arr[j] < pivot) {
+            i++;
+            // Visualize swap
             setSwapping([i, j]);
-            await delay(300);
             [arr[i], arr[j]] = [arr[j], arr[i]];
             setArray([...arr]);
             setSwaps((prev) => prev + 1);
+            await delay(300);
           }
+          setComparing([]);
+          setSwapping([]);
         }
+
+        // Place pivot in correct position
+        const pivotPos = i + 1;
+        setSwapping([pivotPos, high]);
+        [arr[pivotPos], arr[high]] = [arr[high], arr[pivotPos]];
+        setArray([...arr]);
+        setSwaps((prev) => prev + 1);
+        await delay(300);
+        setSwapping([]);
+
+        // Mark pivot position as sorted
+        setSorted((prev) => [...prev, pivotPos]);
+
+        return pivotPos;
+      }
+
+      try {
+        const pivotIndex = await partition(start, end);
+        if (pivotIndex === -1) return; // Sorting was cancelled
+
+        // Sort left and right partitions
+        await quickSort(arr, start, pivotIndex - 1);
+        await quickSort(arr, pivotIndex + 1, end);
+
+        // Mark full range as sorted when both partitions complete
+        if (start === 0 && end === arr.length - 1) {
+          setSorted(Array.from({ length: arr.length }, (_, i) => i));
+        }
+      } catch (error) {
+        console.error("Error in quickSort:", error);
         setComparing([]);
         setSwapping([]);
       }
-
-      setSwapping([i + 1, high]);
-      await delay(300);
-      [arr[i + 1], arr[high]] = [arr[high], arr[i + 1]];
-      setArray([...arr]);
-      setSwaps((prev) => prev + 1);
-      setSwapping([]);
-
-      setSorted((prev) => [...prev, i + 1]);
-      return i + 1;
-    }
-
-    try {
-      const pivotIndex = await partition(start, end);
-      if (start < pivotIndex - 1) await quickSort(start, pivotIndex - 1);
-      if (pivotIndex + 1 < end) await quickSort(pivotIndex + 1, end);
-    } catch (error) {
-      console.error("Error in quickSort:", error);
     }
   }
 
   // Merge Sort Implementation
-  async function mergeSort(start = 0, end = array.length - 1) {
-    let arr = [...array]; // Create a local copy of the array
+  async function mergeSortStart() {
+    const arr = [...array]; // Create a local copy of the array
+    await mergeSort(arr, 0, arr.length - 1);
 
-    if (start >= end) return;
+    async function mergeSort(arr: number[], start: number, end: number) {
+      if (start >= end) return;
 
-    async function merge(left: number, mid: number, right: number) {
-      const leftArray = arr.slice(left, mid + 1);
-      const rightArray = arr.slice(mid + 1, right + 1);
-      let i = 0,
-        j = 0,
-        k = left;
+      async function merge(left: number, mid: number, right: number) {
+        const leftArray = arr.slice(left, mid + 1);
+        const rightArray = arr.slice(mid + 1, right + 1);
+        let i = 0,
+          j = 0,
+          k = left;
 
-      while (i < leftArray.length && j < rightArray.length) {
-        setComparing([left + i, mid + 1 + j]);
-        setComparisons((prev) => prev + 1);
-        await delay(300);
+        while (i < leftArray.length && j < rightArray.length) {
+          setComparing([left + i, mid + 1 + j]);
+          setComparisons((prev) => prev + 1);
+          await delay(300);
 
-        if (leftArray[i] <= rightArray[j]) {
-          arr[k] = leftArray[i];
-          i++;
-        } else {
-          arr[k] = rightArray[j];
-          j++;
+          if (leftArray[i] <= rightArray[j]) {
+            arr[k] = leftArray[i];
+            i++;
+          } else {
+            arr[k] = rightArray[j];
+            j++;
+          }
+
+          setSwapping([k]);
+          setArray([...arr]);
+          setSwaps((prev) => prev + 1);
+          await delay(300);
+          k++;
+
+          setComparing([]);
+          setSwapping([]);
         }
 
-        setSwapping([k]);
-        setArray([...arr]);
-        setSwaps((prev) => prev + 1);
-        await delay(300);
-        k++;
+        while (i < leftArray.length) {
+          arr[k] = leftArray[i];
+          setSwapping([k]);
+          setArray([...arr]);
+          setSwaps((prev) => prev + 1);
+          await delay(300);
+          i++;
+          k++;
+          setSwapping([]);
+        }
 
-        setComparing([]);
-        setSwapping([]);
+        while (j < rightArray.length) {
+          arr[k] = rightArray[j];
+          setSwapping([k]);
+          setArray([...arr]);
+          setSwaps((prev) => prev + 1);
+          await delay(300);
+          j++;
+          k++;
+          setSwapping([]);
+        }
+
+        for (let idx = left; idx <= right; idx++) {
+          setSorted((prev) => [...prev, idx]);
+        }
       }
 
-      while (i < leftArray.length) {
-        arr[k] = leftArray[i];
-        setSwapping([k]);
-        setArray([...arr]);
-        setSwaps((prev) => prev + 1);
-        await delay(300);
-        i++;
-        k++;
-        setSwapping([]);
-      }
-
-      while (j < rightArray.length) {
-        arr[k] = rightArray[j];
-        setSwapping([k]);
-        setArray([...arr]);
-        setSwaps((prev) => prev + 1);
-        await delay(300);
-        j++;
-        k++;
-        setSwapping([]);
-      }
-
-      for (let idx = left; idx <= right; idx++) {
-        setSorted((prev) => [...prev, idx]);
-      }
+      const mid = Math.floor((start + end) / 2);
+      await mergeSort(arr, start, mid);
+      await mergeSort(arr, mid + 1, end);
+      await merge(start, mid, end);
     }
-
-    const mid = Math.floor((start + end) / 2);
-    await mergeSort(start, mid);
-    await mergeSort(mid + 1, end);
-    await merge(start, mid, end);
   }
 
   // Selection Sort Implementation
@@ -339,10 +359,10 @@ const SortingVisualizer: React.FC = () => {
           await bubbleSort();
           break;
         case "quick":
-          await quickSort();
+          await quickSortStart();
           break;
         case "merge":
-          await mergeSort();
+          await mergeSortStart();
           break;
         case "selection":
           await selectionSort();

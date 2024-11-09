@@ -14,8 +14,7 @@ const teamMembers: TeamMember[] = [
     id: 1,
     name: "Suresh",
     role: "Team Lead, web app developement",
-    description:
-      "Expert in algorithm visualization and frontend development. Contributing to making complex algorithms more understandable.",
+    description: "Expert in algorithm visualization and frontend development.",
     imageUrl: "/images/team/member1.png",
     bgColor: "bg-gradient-to-r from-blue-200 via-purple-200 to-pink-200",
   },
@@ -23,8 +22,7 @@ const teamMembers: TeamMember[] = [
     id: 2,
     name: "Greeshma P G",
     role: "Quadratic sorting algos Vizualization",
-    description:
-      "Specialized in developing interactive features and ensuring smooth user experience in algorithm visualization.",
+    description: "Bubble Sort and Selection Sort visualization.",
     imageUrl: "/images/team/member2.png",
     bgColor: "bg-gradient-to-r from-gray-100 to-gray-200",
   },
@@ -32,8 +30,7 @@ const teamMembers: TeamMember[] = [
     id: 3,
     name: "Raman Kumar",
     role: "Quasilinear sorting algos visualization",
-    description:
-      "Focused on implementing sorting algorithms and creating intuitive visual representations for better understanding.",
+    description: "Insetion sort and Merge sort visualization.",
     imageUrl: "/images/team/member3.png",
     bgColor: "bg-gradient-to-r from-green-100 to-green-200",
   },
